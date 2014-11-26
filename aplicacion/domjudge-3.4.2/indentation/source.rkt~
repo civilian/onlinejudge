@@ -1,0 +1,454 @@
+
+#<buffer source.rkt>
+(module source mzscheme
+
+	;;;;;;;;;;;;;;;;;;;;;;
+
+	;  Abstracção Carta  ;
+
+	;;;;;;;;;;;;;;;;;;;;;;
+
+ 
+
+	; 1 - construtor de Carta
+	(define cria-carta-sol
+	  (lambda
+	    (valor naipe)
+	    (cons valor naipe)))
+	; 2 - selectores de Carta
+
+  
+
+	; valor de Carta
+	(define valor-carta-sol
+	  (lambda
+	    (carta)
+	    (car carta)))
+	; naipe de Carta
+	(define naipe-carta-sol
+	  (lambda
+	    (carta)
+	    (cdr carta)))
+	; figura? de Carta
+	(define figura-carta?-sol
+	  (lambda
+	    (carta)
+	    (string?
+	     (valor-carta-sol carta))))
+	;;;;;;;;;;;;;;;;;;;;;;
+
+	; Abstracção Jogador ;
+
+	;;;;;;;;;;;;;;;;;;;;;;
+
+  
+
+	; 3 - construtor de Jogada
+	(define cria-jogador-sol
+	  (lambda
+	    (nome)
+	    (list nome 0)))
+	; 4 - adiciona uma carta ao jogador
+	(define adiciona-carta-jogador-sol
+	  (lambda
+	    (jogador carta)
+	    (append
+	     (list
+	      (car jogador)
+	      (add1
+	       (cadr jogador))
+	      carta)
+	     (cddr jogador))))
+	; 5 - selector do numero de cartas de um determinado naipe
+	(define naipe-jogador-sol
+	  (lambda
+	    (jogador naipe)
+	    (letrec
+		((aux ; conta o numero de cartas de um determinado naipe
+			(lambda
+			  (cartas naipe num)
+			  (if
+			      (null? cartas)
+			      num
+			    (if
+				(equal? naipe
+					(naipe-carta-sol
+					 (car cartas)))
+				(aux
+				 (cdr cartas)
+				 naipe
+				 (add1 num))
+			      (aux
+			       (cdr cartas)
+			       naipe num))))))
+	      (aux
+	       (cddr jogador)
+	       naipe 0))))
+	; 6 - remove carta ao jogador
+	(define remove-carta-jogador-sol
+	  (lambda
+	    (jogador carta)
+	    (letrec
+		((aux ; retorna lista contendo o numero de cartas e a sequencia de cartas apos remover a carta indicada
+			(lambda
+			  (cartas carta)
+			  (if
+			      (zero?
+			       (car cartas))
+			      ; se chegou ao fim das cartas
+				(list 0)
+				(if
+				    (equal?
+				     (cadr cartas)
+				     carta)
+				    ; encontrou a carta?
+				      (cons
+				       (sub1
+					(car cartas))
+				       (cddr cartas))
+				      ; remove a carta
+				      (let
+					  ((resultado
+					    (aux
+					     (cons
+					      (sub1
+					       (car cartas))
+					      (cddr cartas))
+					     carta)))
+					(append
+					 (list
+					  (add1
+					   (car resultado))
+					  (cadr cartas))
+					 (cdr resultado))))))))
+	      (if
+		  (positive?
+		   (cadr jogador))
+		  ; verifica se existem cartas
+		    (cons
+		     (car jogador)
+		     (aux
+		      (cdr jogador)
+		      carta))
+		    jogador))))
+	; Alinea 7
+
+	; compara duas cartas
+	(define ordinal-carta-sol
+	  (lambda
+	    (carta)
+	    (if
+		(figura-carta?-sol carta)
+		(let
+		    ((figura
+		      (valor-carta-sol carta)))
+		  (cond
+		   ((string=? figura "as")
+		    13)
+		   ((string=? figura "rei")
+		    12)
+		   ((string=? figura "valete")
+		    11)
+		   ((#t 10))))
+	      ; chegando aqui, é dama.
+	      (sub1
+	       (valor-carta-sol carta)))))
+	; alternativa com case em vez de cond.
+
+	;(define ordinal-carta-sol
+
+	   ;
+	   (lambda
+	     (carta)
+	     ;
+	     (if (figura-carta? carta)
+		 ;
+		 (case
+		  (valor-carta carta)
+		  ;
+		  ((as)
+		   13)
+		  ;
+		  ((rei)
+		   12)
+		  ;
+		  ((valete)
+		   11)
+		  ;
+		  ((dama)
+		   10))
+	       ;
+	       (sub1
+		(valor-carta carta)))))
+	; determina a carta que corresponde à melhor jogada.
+	(define jogada-jogador-sol
+	  (lambda
+	    (jogador naipe)
+	    (letrec
+		((assiste-maior ; procura a maior carta de um determinado naipe
+				  (lambda
+				    (cartas naipe maior)
+				    (cond
+				     ((null? cartas)
+				      maior)
+				     ((and
+				       (equal? naipe
+					       (naipe-carta-sol
+						(car cartas)))
+				       (>
+					(ordinal-carta-sol
+					 (car cartas))
+					(ordinal-carta-sol maior)))
+				      (assiste-maior
+				       (cdr cartas)
+				       naipe
+				       (car cartas)))
+				     (#t
+				       (assiste-maior
+					(cdr cartas)
+					naipe maior)))))
+		 (menor ; procura a menor carta
+			  (lambda
+			    (cartas men)
+			    (cond
+			     ((null? cartas)
+			      men)
+			     ((<
+			       (ordinal-carta-sol
+				(car cartas))
+			       (ordinal-carta-sol men))
+			      (menor
+			       (cdr cartas)
+			       (car cartas)))
+			     (#t
+			       (menor
+				(cdr cartas)
+				men))))))
+	      (if
+		  (not
+		   (null?
+		    (cddr jogador)))
+		  (if
+		      (positive?
+		       (naipe-jogador-sol jogador naipe))
+		      ; assiste com a maior carta
+			(assiste-maior
+			 (cddr jogador)
+			 naipe
+			 (cria-carta-sol 2 naipe))
+			;inicia com um minimo
+			(duque)
+			; menor carta
+			(menor
+			 (cddr jogador)
+			 (caddr jogador)))))))
+	;studentcode
+
+  
+
+	;pergunta 1
+	(define pergunta1
+	  (lambda()
+	    (let
+		((valor
+		  (read))
+		 (naipe
+		  (read)))
+	      (display
+	       (cria-carta-sol valor naipe))
+	      (newline)
+	      (main))))
+	;pergunta 2
+	(define pergunta2
+	  (lambda()
+	    (let
+		((tipo_test
+		  (read))
+		 (valor
+		  (read))
+		 (naipe
+		  (read)))
+	      (cond
+	       ((string=? tipo_test "valor")
+		(pergunta2_valor_carta valor naipe))
+	       ((string=? tipo_test "naipe")
+		(pergunta2_naipe_carta valor naipe))
+	       ((string=? tipo_test "figura")
+		(pergunta2_figura_carta valor naipe))))))
+	(define pergunta2_valor_carta
+	  (lambda(valor naipe)
+	    (display
+	     (valor-carta
+	      (cria-carta-sol valor naipe)))
+	    (newline)
+	    (main)))
+	(define pergunta2_naipe_carta
+	  (lambda(valor naipe)
+	    (display
+	     (naipe-carta
+	      (cria-carta-sol valor naipe)))
+	    (newline)
+	    (main)))
+	(define pergunta2_figura_carta
+	  (lambda(valor naipe)
+	    (display
+	     (figura-carta?
+	      (cria-carta-sol valor naipe)))
+	    (newline)
+	    (main)))
+	;pergunta 3
+	(define pergunta3
+	  (lambda()
+	    (let
+		((nome
+		  (read)))
+	      (display
+	       (cria-jogador nome))
+	      (newline)
+	      (main))))
+	;pergunta 4
+	(define pergunta4
+	  (lambda()
+	    (let
+		((nome
+		  (read))
+		 (n_cartas(read)))
+	      (pergunta4_aux
+	       (cria-jogador-sol nome)
+	       0 n_cartas))))
+	(define pergunta4_aux
+	  (lambda(jogador cartas_lidas total_cartas)
+	    (cond
+	     ((= cartas_lidas total_cartas)
+	      (display jogador)
+	      (newline)
+	      (main))
+	     ((let
+		  ((valor
+		    (read))
+		   (naipe
+		    (read)))
+		(pergunta4_aux
+		 (adiciona-carta-jogador jogador
+					 (cria-carta-sol valor naipe))
+		 (+ cartas_lidas 1)
+		 total_cartas))))))
+	;pergunta 5
+	(define pergunta5
+	  (lambda()
+	    (let
+		((nome
+		  (read))
+		 (n_cartas(read)))
+	      (pergunta5_aux
+	       (cria-jogador-sol nome)
+	       0 n_cartas))))
+	(define pergunta5_aux
+	  (lambda(jogador cartas_lidas total_cartas)
+	    (cond
+	     ((= cartas_lidas total_cartas)
+	      ((let
+		   ((naipe
+		     (read)))
+		 (display
+		  (naipe-jogador jogador naipe))
+		 (newline)
+		 (main))))
+	     ((let
+		  ((valor
+		    (read))
+		   (naipe
+		    (read)))
+		(pergunta5_aux
+		 (adiciona-carta-jogador-sol jogador
+					     (cria-carta-sol valor naipe))
+		 (+ cartas_lidas 1)
+		 total_cartas))))))
+	;pergunta 6
+	(define pergunta6
+	  (lambda()
+	    (let
+		((nome
+		  (read))
+		 (n_cartas(read)))
+	      (pergunta6_aux
+	       (cria-jogador-sol nome)
+	       0 n_cartas))))
+	(define pergunta6_aux
+	  (lambda(jogador cartas_lidas total_cartas)
+	    (cond
+	     ((= cartas_lidas total_cartas)
+	      ((let
+		   ((valor
+		     (read))
+		    (naipe
+		     (read)))
+		 (display
+		  (remove-carta-jogador jogador
+					(cria-carta-sol valor naipe)))
+		 (newline)
+		 (main))))
+	     ((let
+		  ((valor
+		    (read))
+		   (naipe
+		    (read)))
+		(pergunta6_aux
+		 (adiciona-carta-jogador-sol jogador
+					     (cria-carta-sol valor naipe))
+		 (+ cartas_lidas 1)
+		 total_cartas))))))
+	;pergunta 7
+	(define pergunta7
+	  (lambda()
+	    (let
+		((nome
+		  (read))
+		 (n_cartas(read)))
+	      (pergunta7_aux
+	       (cria-jogador-sol nome)
+	       0 n_cartas))))
+	(define pergunta7_aux
+	  (lambda(jogador cartas_lidas total_cartas)
+	    (cond
+	     ((= cartas_lidas total_cartas)
+	      ((let
+		   ((naipe
+		     (read)))
+		 (display
+		  (jogada-jogador-sol jogador  naipe))
+		 (newline)
+		 (main))))
+	     ((let
+		  ((valor
+		    (read))
+		   (naipe
+		    (read)))
+		(pergunta7_aux
+		 (adiciona-carta-jogador-sol jogador
+					     (cria-carta-sol valor naipe))
+		 (+ cartas_lidas 1)
+		 total_cartas))))))
+	(define main
+	  (lambda()
+	    (let
+		((str
+		  (read)))
+	      (cond
+	       ((eof-object? str)
+		(exit 0))
+	       ((string=? str "pergunta1")
+		(pergunta1))
+	       ((string=? str "pergunta2")
+		(pergunta2))
+	       ((string=? str "pergunta3")
+		(pergunta3))
+	       ((string=? str "pergunta4")
+		(pergunta4))
+	       ((string=? str "pergunta5")
+		(pergunta5))
+	       ((string=? str "pergunta6")
+		(pergunta6))
+	       ((string=? str "pergunta7")
+		(pergunta7))))))
+	(main))

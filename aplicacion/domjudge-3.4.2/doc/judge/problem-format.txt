@@ -1,0 +1,81 @@
+  DOMjudge problem format specification
+  by the DOMjudge team
+
+
+
+  11..  DDOOMMjjuuddggee pprroobblleemm ffoorrmmaatt
+
+  This specification is dedicated to the public domain. Its authors
+  waive all rights to the work worldwide under copyright law, including
+  all related and neighboring rights, as specified in the Creative
+  Commons Public Domain Dedication (CC0 1.0)
+  <http://creativecommons.org/publicdomain/zero/1.0/>.
+
+  DOMjudge supports the import and export of problems in a zip-bundle
+  format. This zip file contains the following files in its base
+  directory:
+
+     domjudge-problem.ini
+        This file has a simple INI-syntax and contains problem metadata,
+        see below.
+
+     problem.{pdf,html,txt}
+        The full problem statement as distributed to participants. The
+        file extension determines any of three supported formats. If
+        multiple files matching this pattern are available, any one of
+        those will be used.
+
+     <testdata-file>.in / <testdata-file>.out
+        Each pair of <testdata-file>.{in,out} contains the input and
+        correct/reference output for a single test case. Single files
+        without their corresponding in or out counterpart are ignored.
+        The order of the files in the zip archive determines the initial
+        ordering of the testcases after import.
+
+     <solution>.<ext>
+        Submits code of reference solution as team 'domjudge' if <ext>
+        is a known language extension. The contest, the problem, and the
+        language have to be enabled. The contest must be started. If you
+        include a comment starting with '@EXPECTED_RESULTS@: ' followed
+        by the possible outcomes, you can use the _j_u_d_g_i_n_g _v_e_r_i_f_i_e_r in
+        the admin interface to verify the results.
+
+
+  When importing a zip file into DOMjudge, any other files are ignored.
+
+  The file domjudge-problem.ini contains key-value pairs, one pair per
+  line, of the form key = value. The = can optionally be surrounded by
+  whitespace and the value may be quoted, which allows it to contain
+  newlines. The following keys are supported (these correspond directly
+  to the problem settings in the jury web interface):
+
+  +o  probid - the problem identifier
+
+  +o  cid - the associated contest identifier
+
+  +o  name - the problem displayed name
+
+  +o  allow_submit - allow submissions to this problem, disabling this
+     also makes the problem invisible to teams and public
+
+  +o  allow_judge - allow judging of this problem
+
+  +o  timelimit - time limit in seconds per test case
+
+  +o  special_run - suffix tag of a special run script
+
+  +o  special_compare - suffix tag of a special compare script
+
+  +o  color - CSS color specification for this problem
+
+  The probid key is required when importing a new problem from the
+  jury/problems.php overview page, while it is ignored when uploading
+  into an existing problem. All other keys are optional. If they are
+  present, the respective value will be overwritten; if not present,
+  then the value will not be changed or a default chosen when creating a
+  new problem. Test data files are added to set of test cases already
+  present. Thus, one can easily add test cases to a configured problem
+  by uploading a zip file that contains only *.{in,out} files.
+
+
+

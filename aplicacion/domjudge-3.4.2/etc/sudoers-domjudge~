@@ -1,0 +1,48 @@
+# Generated from 'sudoers-domjudge.in' on Fri Jun 13 18:56:29 COT 2014.
+
+# Example sudoers configuration for DOMjudge.
+# Check the file paths (especially the chroot prefix),
+# give it file mode 0440 and place this file into /etc/sudoers.d/
+# (most recent sudo versions; otherwise use an #include statement
+# in or add its content to the end of /etc/sudoers)
+
+civilian ALL=(root) NOPASSWD: /home/civilian/repos/tg/domjudge-3.4.2/bin/runguard *
+civilian ALL=(root) NOPASSWD: /bin/cp -pR /dev/null ../dev/null
+
+# The following is needed if you set USE_CHROOT=1 (recommended).
+# The chroot path below must match the path in chroot-startstop.sh.
+civilian ALL=(root) NOPASSWD: /bin/mount -n -t proc --bind /proc proc
+civilian ALL=(root) NOPASSWD: /bin/umount /*/proc
+civilian ALL=(root) NOPASSWD: /bin/mount --bind /chroot/domjudge/*
+civilian ALL=(root) NOPASSWD: /bin/mount -o remount\,ro\,bind /home/civilian/repos/tg/domjudge-3.4.2/output/judging/*
+civilian ALL=(root) NOPASSWD: /bin/umount /home/civilian/repos/tg/domjudge-3.4.2/output/judging/*
+civilian ALL=(root) NOPASSWD: /bin/cp -pR /dev/random dev
+civilian ALL=(root) NOPASSWD: /bin/cp -pR /dev/urandom dev
+
+
+#Para generar uno mas completo
+#root ALL=(root) NOPASSWD: /home/civilian/public_html/tg/domjudge-3.4.2/bin/runguard *
+#root ALL=(root) NOPASSWD: /home/civilian/public_html/tg/domjudge-3.4.2/judge/judgedaemon *
+
+#%wheel ALL=(ALL) NOPASSWD: /home/civilian/public_html/tg/domjudge-3.4.2/bin/runguard *
+#%wheel ALL=(ALL) NOPASSWD: /home/civilian/public_html/tg/domjudge-3.4.2/judge/judgedaemon *
+
+#root ALL=(root) NOPASSWD: /home/civilian/public_html/tg/domjudge/judgehost/bin/runguard *
+#root ALL=(root) NOPASSWD: /home/civilian/public_html/tg/domjudge/judgehost/bin/judgedaemon *
+#root ALL=(root) NOPASSWD: /bin/cp -pR /dev/null ../dev/null
+
+#%wheel ALL=(ALL) NOPASSWD: /home/civilian/public_html/tg/domjudge/judgehost/bin/runguard *
+#%wheel ALL=(ALL) NOPASSWD: /home/civilian/public_html/tg/domjudge/judgehost/bin/judgedaemon *
+#%wheel ALL=(ALL) NOPASSWD: /bin/cp -pR /dev/null ../dev/null
+
+# The following is needed if you set USE_CHROOT=1 (recommended).
+# The chroot path below must match the path in chroot-startstop.sh.
+
+#root ALL=(root) NOPASSWD: /bin/mount -n -t proc --bind /proc proc
+#root ALL=(root) NOPASSWD: /bin/umount /*/proc
+#root ALL=(root) NOPASSWD: /bin/mount --bind /chroot/domjudge/*
+#root ALL=(root) NOPASSWD: /bin/mount -o remount\,ro\,bind /home/civilian/public_html/tg/domjudge/judgehost/judgings/*
+#root ALL=(root) NOPASSWD: /bin/umount /home/civilian/public_html/tg/domjudge/judgehost/judgings/*
+#root ALL=(root) NOPASSWD: /bin/cp -pR /dev/random dev
+#root ALL=(root) NOPASSWD: /bin/cp -pR /dev/urandom dev
+

@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<LINK REL="stylesheet" HREF="../../../style.css">
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.66">
+ <TITLE>DOMjudge Jury Manual: Checktestdata language specification </TITLE>
+ <LINK HREF="judge-manual-7.html" REL=next>
+ <LINK HREF="judge-manual-5.html" REL=previous>
+ <LINK HREF="judge-manual.html#toc6" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="judge-manual-7.html">Next</A>
+<A HREF="judge-manual-5.html">Previous</A>
+<A HREF="judge-manual.html#toc6">Contents</A>
+<HR>
+<H2><A NAME="checktestdata-grammar"></A> <A NAME="s6">6.</A> <A HREF="judge-manual.html#toc6">Checktestdata language specification </A></H2>
+
+<P>This specification is dedicated to the public domain. Its authors
+waive all rights to the work worldwide under copyright law, including
+all related and neighboring rights, as specified in the
+<A HREF="http://creativecommons.org/publicdomain/zero/1.0/">Creative Commons Public Domain Dedication (CC0 1.0)</A>.</P>
+
+<P>Grammar and command syntax below. A valid checktestdata program
+consists of a list of commands. All commands are uppercase, while
+variables are lowercase with non-leading digits. Lines starting with
+'#' are comments and ignored.</P>
+<P>The following grammar sub-elements are defined:
+<HR>
+<PRE>
+integer  := 0|-?[1-9][0-9]*
+float    := -?[0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)?
+string   := ".*"
+varname  := [a-z][a-z0-9]*
+variable := &lt;varname&gt; | &lt;varname&gt; '[' &lt;expr&gt; [',' &lt;expr&gt; ...] ']'
+value    := &lt;integer&gt; | &lt;float&gt; | &lt;string&gt; | &lt;variable&gt;
+compare  := '&lt;' | '&gt;' | '&lt;=' | '&gt;=' | '==' | '!='
+logical  := '&amp;&amp;' | '||'
+expr     := &lt;term&gt; | &lt;expr&gt; [+-] &lt;term&gt;
+term     := &lt;term&gt; [*%/] &lt;factor&gt; | &lt;factor&gt;
+factor   := &lt;value&gt; | '-' &lt;term&gt; | '(' &lt;expr&gt; ')' | &lt;factor&gt; '^' &lt;factor&gt;
+test     := '!' &lt;test&gt; | &lt;test&gt; &lt;logical&gt; &lt;test&gt; | '(' &lt;test&gt; ')' |
+             &lt;expr&gt; &lt;compare&gt; &lt;expr&gt; | &lt;testcommand&gt;
+</PRE>
+<HR>
+</P>
+
+<P>That is, variables can take integer, floating point as well as string
+values. No dynamic casting is performed, except that integers can be
+cast into floats. Integers and floats of arbitrary size and precision
+are supported, as well as the arithmetic operators <CODE>+-*%/^</CODE>
+with the usual rules of precedence. An expression is integer if all
+its sub-expressions are integer. Integer division is used on integers.
+The exponentiation operator <CODE>^</CODE> only allows non-negative
+integer exponents that fit in an unsigned long. String-valued
+variables can only be compared (lexicographically), no operators are
+supported.</P>
+
+<P>Within a string, the backslash acts as escape character for the
+following expressions:
+<UL>
+<LI> <CODE>\[0-7]{1,3}</CODE> denotes an octal escape for a character</LI>
+<LI> <CODE>\n, \t, \r, \b</CODE> denote linefeed, tab, carriage return and backspace</LI>
+<LI> <CODE>\"</CODE> and <CODE>\\</CODE> denote " and \</LI>
+<LI> an escaped newline is ignored (line continuation)</LI>
+</UL>
+
+A backslash preceding any other character is treated as a literal
+backslash.</P>
+
+<P>Tests can be built from comparison operators, the usual logical
+operators <CODE>! &amp;&amp; ||</CODE> (not, and, or) and a number of test
+commands that return a boolean value. These are:
+<DL>
+<DT><B><CODE>MATCH(&lt;string&gt; str)</CODE></B><DD>
+<P>Returns whether the next character matches any of the characters
+in 'str'.</P>
+
+<DT><B><CODE>ISEOF</CODE></B><DD>
+<P>Returns whether end-of-file has been reached.</P>
+
+<DT><B><CODE>UNIQUE(&lt;varname&gt; a [,&lt;varname&gt; b ...])</CODE></B><DD>
+<P>Checks for uniqueness of tuples of values in the combined (array)
+variables a, b, ... That is, it is checked that firstly all
+arguments have precisely the same set of indices defined, and
+secondly that the tuples formed by evaluating (a,b,...) at these
+indices are unique. For example, if x,y are 1D arrays containing
+coordinates, then <CODE>UNIQUE(x,y)</CODE> checks that the points
+(x[i],y[i]) in the plane are unique.</P>
+
+<DT><B><CODE>INARRAY(&lt;value&gt; val, &lt;varname&gt; array)</CODE></B><DD>
+<P>Checks if val occurs in one of the indices of array.</P>
+</DL>
+</P>
+<P>The following commands are available:
+<DL>
+<DT><B><CODE>SPACE</CODE> / <CODE>NEWLINE</CODE></B><DD>
+<P>No-argument commands matching a single space (0x20) or newline
+respectively.</P>
+
+<DT><B><CODE>EOF</CODE></B><DD>
+<P>Matches end-of-file. This is implicitly added at the end of each
+program and must match exactly: no extra data may be present.</P>
+
+<DT><B><CODE>INT(&lt;expr&gt; min, &lt;expr&gt; max [, &lt;variable&gt; name])</CODE></B><DD>
+<P>Match an arbitrary sized integer value in the interval [min,max]
+and optionally assign the value read to variable 'name'.</P>
+
+<DT><B><CODE>FLOAT(&lt;expr&gt; min, &lt;expr&gt; max [, &lt;variable&gt; name [, option]])</CODE></B><DD>
+<P>Match a floating point number in the range [min,max] and
+optionally assign the value read to the variable 'name'. When the
+option 'FIXED' or 'SCIENTIFIC' is set, only accept floating point
+numbers in fixed point or scientific notation, respectively.</P>
+
+<DT><B><CODE>STRING(&lt;value&gt; str)</CODE></B><DD>
+<P>Match the string (variable) 'str'.</P>
+
+<DT><B><CODE>REGEX(&lt;string&gt; str [, &lt;variable&gt; name])</CODE></B><DD>
+<P>Match the extended regular expression 'str'. Matching is performed
+greedily. Optionally assign the matched string to variable 'name'.</P>
+
+<DT><B><CODE>ASSERT(&lt;test&gt; condition)</CODE></B><DD>
+<P>Assert that 'condition' is true, fail otherwise.</P>
+
+<DT><B><CODE>UNSET(&lt;varname&gt; a [,&lt;varname&gt; b ...])</CODE></B><DD>
+<P>Unset all values for variables a, b, ... This includes all values
+for array indexed variables with these names. This command should
+typically be inserted at the end of a loop after using UNIQUE or
+INARRAY, to make sure that no old variables are present anymore
+during the next iteration.</P>
+
+<DT><B><CODE>REP(&lt;expr&gt; count [,&lt;command&gt; separator]) [&lt;command&gt;...] END</CODE></B><DD>
+
+<DT><B><CODE>REPI(&lt;variable&gt; i, &lt;expr&gt; count [,&lt;command&gt; separator]) [&lt;command&gt;...] END</CODE></B><DD>
+<P>Repeat the commands between the 'REP() ... END' statements count
+times and optionally match 'separator' command (count-1) times in
+between. The value of count must fit in an unsigned 32 bit int.
+The second command 'REPI' does the same, but also stores the
+current iteration (counting from zero) in the variable 'i'.</P>
+
+<DT><B><CODE>WHILE(&lt;test&gt; condition [,&lt;command&gt; separator]) [&lt;command&gt;...] END</CODE></B><DD>
+
+<DT><B><CODE>WHILEI(&lt;variable&gt; i, &lt;test&gt; condition [,&lt;command&gt; separator]) [&lt;command&gt;...] END</CODE></B><DD>
+<P>Repeat the commands as long as 'condition' is true. Optionally
+match 'separator' command between two consecutive iterations.
+The second command 'WHILEI' does the same, but also stores the
+current iteration (counting from zero) in the variable 'i'.</P>
+
+<DT><B><CODE>IF(&lt;test&gt; cond) [&lt;command&gt; cmds1...] [ELSE [&lt;command&gt; cmds2...]] END</CODE></B><DD>
+<P>Executes cmds1 if cond is true. Otherwise, executes cmds2 if the
+else statement is available.</P>
+</DL>
+
+</P>
+
+<HR>
+<A HREF="judge-manual-7.html">Next</A>
+<A HREF="judge-manual-5.html">Previous</A>
+<A HREF="judge-manual.html#toc6">Contents</A>
+</BODY>
+</HTML>

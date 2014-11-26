@@ -1,0 +1,142 @@
+\hypertarget{classjudge__base}{\section{judge\-\_\-base Class Reference}
+\label{classjudge__base}\index{judge\-\_\-base@{judge\-\_\-base}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classjudge__base_a657dfe7c7b40926f36b41d2694dcb3a2}{{\bfseries \-\_\-\-\_\-construct} (\$task)}\label{classjudge__base_a657dfe7c7b40926f36b41d2694dcb3a2}
+
+\item 
+\hyperlink{classjudge__base_a5de54be3bb7d6eaf4f99db87ab9074d0}{judge} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classjudge__base_a3ec6284e7ab117f88e9ac8590f5a7984}{get\-\_\-languages} ()
+\item 
+static \hyperlink{classjudge__base_abcb84ebdef8bd20fbd517c37ea09d162}{parse\-\_\-options} (\$options, \&\$task)
+\item 
+static \hyperlink{classjudge__base_a67f8533487464f6b877981585a8c6bc4}{get\-\_\-compiler\-\_\-info} (\$language)
+\item 
+static \hyperlink{classjudge__base_a61fce49424ae08c6d3edccf6f8cc768f}{is\-\_\-available} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classjudge__base_abf16f4357be502834cd1415067479581}{convert\-\_\-to\-\_\-utf8} (\$string)
+\item 
+\hyperlink{classjudge__base_a01360820e47c36821fca6c45e5f259e3}{diff} ()
+\item 
+\hyperlink{classjudge__base_a72ad9e732c1f6317999bc6ab89f8b5a0}{create\-\_\-temp\-\_\-files} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classjudge__base_a077af7aad9f07ad59923330e973023b4}{{\bfseries \$task}}\label{classjudge__base_a077af7aad9f07ad59923330e973023b4}
+
+\item 
+\hypertarget{classjudge__base_a35ece71599e0fb37b864cb4854956c68}{{\bfseries \$language}}\label{classjudge__base_a35ece71599e0fb37b864cb4854956c68}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classjudge__base_abf16f4357be502834cd1415067479581}{\index{judge\-\_\-base@{judge\-\_\-base}!convert\-\_\-to\-\_\-utf8@{convert\-\_\-to\-\_\-utf8}}
+\index{convert\-\_\-to\-\_\-utf8@{convert\-\_\-to\-\_\-utf8}!judge_base@{judge\-\_\-base}}
+\subsubsection[{convert\-\_\-to\-\_\-utf8}]{\setlength{\rightskip}{0pt plus 5cm}judge\-\_\-base\-::convert\-\_\-to\-\_\-utf8 (
+\begin{DoxyParamCaption}
+\item[{}]{\$string}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classjudge__base_abf16f4357be502834cd1415067479581}
+If string is not encoded in U\-T\-F-\/8, convert it into utf-\/8 charset \hypertarget{classjudge__base_a72ad9e732c1f6317999bc6ab89f8b5a0}{\index{judge\-\_\-base@{judge\-\_\-base}!create\-\_\-temp\-\_\-files@{create\-\_\-temp\-\_\-files}}
+\index{create\-\_\-temp\-\_\-files@{create\-\_\-temp\-\_\-files}!judge_base@{judge\-\_\-base}}
+\subsubsection[{create\-\_\-temp\-\_\-files}]{\setlength{\rightskip}{0pt plus 5cm}judge\-\_\-base\-::create\-\_\-temp\-\_\-files (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classjudge__base_a72ad9e732c1f6317999bc6ab89f8b5a0}
+Save files of current task to a temp directory
+
+\begin{DoxyReturn}{Returns}
+array of the full path of saved files 
+\end{DoxyReturn}
+\hypertarget{classjudge__base_a01360820e47c36821fca6c45e5f259e3}{\index{judge\-\_\-base@{judge\-\_\-base}!diff@{diff}}
+\index{diff@{diff}!judge_base@{judge\-\_\-base}}
+\subsubsection[{diff}]{\setlength{\rightskip}{0pt plus 5cm}judge\-\_\-base\-::diff (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classjudge__base_a01360820e47c36821fca6c45e5f259e3}
+Compare the stdout of program and the output of testcase \hypertarget{classjudge__base_a67f8533487464f6b877981585a8c6bc4}{\index{judge\-\_\-base@{judge\-\_\-base}!get\-\_\-compiler\-\_\-info@{get\-\_\-compiler\-\_\-info}}
+\index{get\-\_\-compiler\-\_\-info@{get\-\_\-compiler\-\_\-info}!judge_base@{judge\-\_\-base}}
+\subsubsection[{get\-\_\-compiler\-\_\-info}]{\setlength{\rightskip}{0pt plus 5cm}static judge\-\_\-base\-::get\-\_\-compiler\-\_\-info (
+\begin{DoxyParamCaption}
+\item[{}]{\$language}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classjudge__base_a67f8533487464f6b877981585a8c6bc4}
+Return the infomation of the compiler of specified language
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$language} & I\-D of the language \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+compiler information or null 
+\end{DoxyReturn}
+\hypertarget{classjudge__base_a3ec6284e7ab117f88e9ac8590f5a7984}{\index{judge\-\_\-base@{judge\-\_\-base}!get\-\_\-languages@{get\-\_\-languages}}
+\index{get\-\_\-languages@{get\-\_\-languages}!judge_base@{judge\-\_\-base}}
+\subsubsection[{get\-\_\-languages}]{\setlength{\rightskip}{0pt plus 5cm}static judge\-\_\-base\-::get\-\_\-languages (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classjudge__base_a3ec6284e7ab117f88e9ac8590f5a7984}
+Return an array of programming languages supported by this judge
+
+The array key must be the language's I\-D, such as c\-\_\-sandbox, python\-\_\-ideone. The array value must be a human-\/readable name of the language, such as 'C (local)', 'Python (ideone.\-com)' \hypertarget{classjudge__base_a61fce49424ae08c6d3edccf6f8cc768f}{\index{judge\-\_\-base@{judge\-\_\-base}!is\-\_\-available@{is\-\_\-available}}
+\index{is\-\_\-available@{is\-\_\-available}!judge_base@{judge\-\_\-base}}
+\subsubsection[{is\-\_\-available}]{\setlength{\rightskip}{0pt plus 5cm}static judge\-\_\-base\-::is\-\_\-available (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classjudge__base_a61fce49424ae08c6d3edccf6f8cc768f}
+Whether the judge is avaliable
+
+\begin{DoxyReturn}{Returns}
+true for yes, false for no 
+\end{DoxyReturn}
+\hypertarget{classjudge__base_a5de54be3bb7d6eaf4f99db87ab9074d0}{\index{judge\-\_\-base@{judge\-\_\-base}!judge@{judge}}
+\index{judge@{judge}!judge_base@{judge\-\_\-base}}
+\subsubsection[{judge}]{\setlength{\rightskip}{0pt plus 5cm}judge\-\_\-base\-::judge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classjudge__base_a5de54be3bb7d6eaf4f99db87ab9074d0}
+Judge the current task
+
+\begin{DoxyReturn}{Returns}
+updated task or false 
+\end{DoxyReturn}
+\hypertarget{classjudge__base_abcb84ebdef8bd20fbd517c37ea09d162}{\index{judge\-\_\-base@{judge\-\_\-base}!parse\-\_\-options@{parse\-\_\-options}}
+\index{parse\-\_\-options@{parse\-\_\-options}!judge_base@{judge\-\_\-base}}
+\subsubsection[{parse\-\_\-options}]{\setlength{\rightskip}{0pt plus 5cm}static judge\-\_\-base\-::parse\-\_\-options (
+\begin{DoxyParamCaption}
+\item[{}]{\$options, }
+\item[{\&}]{\$task}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classjudge__base_abcb84ebdef8bd20fbd517c37ea09d162}
+Put options into task
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & options \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+throw exceptions on error 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+judgelib.\-php\end{DoxyCompactItemize}

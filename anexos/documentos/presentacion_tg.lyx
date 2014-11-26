@@ -1,0 +1,2363 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\definecolor{rojo}{rgb}{0.78125,0,0}
+\definecolor{gris}{rgb}{0.25,0.25,0.25}
+%\usetheme[style=simple,basecolour=gris,topbarcolour=rojo,not@ku={Universidad del Valle},totalframes=hide]{Frederiksberg}
+%\usetheme{Ilmenau}
+\usetheme{CambridgeUS}
+% or ... 
+
+%Cosas para el tema Freferiksberg
+%\logo{\color{red}\large {\includegraphics[scale=0.2]{img/Presentacion/logo-uv}}}
+
+\setbeamercovered{transparent}
+% or whatever (possibly just delete it)
+
+%Viñetas rojas
+\setbeamercolor*{item}{fg=rojo}
+
+%Para poder justificar
+\usepackage{ragged2e}
+
+%Color del bloque
+%\setbeamercolor{block title}{fg=white,bg=red!50!black}
+
+%Varias columnas
+\usepackage{multicol} 
+
+\setbeamertemplate{caption}[numbered]
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman times
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 2
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Índice
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+justifying
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+let
+\backslash
+olditem
+\backslash
+item
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+item}{
+\backslash
+justifying 
+\backslash
+olditem}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%Poner en negrilla los titulos de los frames (frametitle) y del titulo (title)
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+setbeamerfont{frametitle}{series=
+\backslash
+bfseries}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setbeamerfont{title}{series=
+\backslash
+bfseries}
+\end_layout
+
+\begin_layout Plain Layout
+
+%Cambiar el color de los titulos de los frames (frametitle) y del titulo
+ (title)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setbeamercolor{frametitle}{fg=rojo}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setbeamercolor{title}{fg=rojo}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Importar el modulo beamer-incremented-lists.module en la carpeta .lyx/layouts/
+ Reconfigurar lyx y reiniciarlo.
+ Usar el que está en el repositorio de tg!!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+DESARROLLO DE UNA APLICACIÓN WEB PARA LA AUTOMATIZACIÓN DE ENTREGA Y CORRECCIÓN
+ DE TRABAJOS DE PROGRAMACIÓN
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Juez Online
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Oscar
+\begin_inset space ~
+\end_inset
+
+Augusto
+\begin_inset space ~
+\end_inset
+
+Chamat
+\begin_inset space ~
+\end_inset
+
+Caicedo
+\begin_inset Newline newline
+\end_inset
+
+Director: Ángel García Baños, Ph.D.
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+Oscar Chamat Caicedo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Institute
+Escuela de Ingeniería de Sistemas y Computación
+\begin_inset Newline newline
+\end_inset
+
+Laboratorio de Computación Evolutiva y Vida Artificial
+\begin_inset Argument
+status open
+
+\begin_layout Plain Layout
+EVALAB
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Date
+Agosto 2014
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Lo siguiente hace que se muestre un índice al inicio de cada subsección.
+ Suprímelo si no lo quieres.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%
+\backslash
+AtBeginSubsection[]{
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%  
+\backslash
+frame<beamer>{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%    
+\backslash
+frametitle{Índice}   
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%    
+\backslash
+tableofcontents[currentsection,currentsubsection] 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%  }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+%}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{tocdepth}{1}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+AtBeginSection[]{
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+frame<beamer>{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+frametitle{Índice}   
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+tableofcontents[currentsection] 
+\end_layout
+
+\begin_layout Plain Layout
+
+  }
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Índice
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introducción
+\end_layout
+
+\begin_layout Subsection
+Objetivos General
+\end_layout
+
+\begin_layout BeginFrame
+Objetivo General
+\end_layout
+
+\begin_layout Standard
+Desarrollar una aplicación Web que permita la calificación automática de
+ trabajos de programación.
+\end_layout
+
+\begin_layout BeginFrame
+Metodología Usada
+\end_layout
+
+\begin_layout ItemizeIncremental
+Se utilizo para desarrollar el trabajo de grado la metodología XP (Extreme
+ Programing).
+\end_layout
+
+\begin_layout ItemizeIncremental
+Como metodología (forma de hacer las cosas) en lo posible se respeta su
+ orden en la exposición.
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Planeación
+\end_layout
+
+\begin_layout Subsection
+Plan De Entregas
+\end_layout
+
+\begin_layout BeginFrame
+Primer Plan De Entregas
+\end_layout
+
+\begin_layout Itemize
+Pero primero para recortar algo de tiempo de la expocisión:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+*Historias de usuario, manejo, codificacion, etc.
+\end_layout
+
+\begin_layout Itemize
+*Y luego cada etapa hasta volver a las historias de usuario(iterar).
+\end_layout
+
+\begin_layout Itemize
+*Dos iteraciones, etapa de manejo.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename imagenes_presentacion/primerPlanDeEntregas.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Primer Plan de entregas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Aunque primero debería ir las historias de usuario luego el manejo, luego
+ la códificación, etc.
+\end_layout
+
+\begin_layout Plain Layout
+Primero les voy a decir como fue la etapa de manejo y el cambio de iteración
+\end_layout
+
+\begin_layout Plain Layout
+En este momento me salto algunos pasos de la metodología que se realizaron
+ para luego presentar los de las dos dos iteraciones juntas y no repetir
+ cosas.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Manejo
+\end_layout
+
+\begin_layout Itemize
+Debido a problemas de diseño y sobreestimación se hizo necesaria lo que
+ es conocido en Programación Extrema como 
+\begin_inset Quotes eld
+\end_inset
+
+arreglar xp cuando esta roto
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Del paso de xp llamado manejo
+\end_layout
+
+\end_inset
+
+ que permitió adaptar la anterior metodología BDD gracias a sus similitudes.
+\end_layout
+
+\begin_layout Itemize
+También permitió eliminar dos historias de usuario -gráficas de grupo-.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Todavía se encuentran las maquetas de estas gráficas en el código.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Historias De Usuario (Planeación)
+\begin_inset Note Note
+status open
+
+\begin_layout Standard
+Bueno cuales eran estás gráficas como historias de usuario.
+\end_layout
+
+\begin_layout Plain Layout
+En la primera fase de planeación el proyecto se incluyeron historias de
+ usuario que fueron eliminadas en una iteración posterior.
+ También el proyecto sufrió un cambio de metodología
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Realizar una tabla estadística con los resultados generados en cada una
+ de las pruebas para todos los estudiantes con un trabajo de programación
+ teniendo en cuenta los apartados mencionados (documentación, estilo, errores
+ de código fuente y errores en los resultados).
+ Y que sea visualizable para cualquier usuario que tenga que ver con el
+ curso a el cual se asigno el trabajo de programación.
+\end_layout
+
+\begin_layout Itemize
+Realizar una tabla estadística con los resultados generados en cada una
+ de las pruebas para todos los estudiantes con todos los trabajo de programación
+ teniendo en cuenta los apartados mencionados (documentación, estilo, errores
+ de código fuente y errores en los resultados).
+ Y que sea visualizable para cualquier usuario que tenga que ver con el
+ curso a el cual se asigno el trabajo de programación.
+\end_layout
+
+\begin_layout Subsection
+Plan De Entregas
+\end_layout
+
+\begin_layout BeginFrame
+Segundo Plan De Entregas
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename imagenes_presentacion/segundoPlanDeEntregas.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Segundo Plan de entregas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Si quiero decir algo acordarme del manejo: Demasiados spikes para poner
+ un paso constante
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Iteración
+\end_layout
+
+\begin_layout BeginFrame
+Iteración
+\end_layout
+
+\begin_layout Itemize
+Debido al proceso de manejo con ciertos entregables y la redefinición de
+ algunas partes del proyecto se comienza una nueva iteración.
+\end_layout
+
+\begin_layout Itemize
+En esta iteración se tienen en cuenta de nuevo: Historias de usuario y plan
+ de entregas.
+\end_layout
+
+\begin_layout Subsection
+Historias De Usuario (Objetivos / Resultados Esperados).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Las historias de usuario nacen de los objetivos específicos y se le añaden
+ como se expanden los mismos en resultados esperados.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Historias De Usuario
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Bueno entonces ahora si que tiene este trabajo de grado, estas son todas
+ las historias de usuario 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Buscar una aplicación o escribir el código necesario que cumpla las siguientes
+ condiciones y tenga los siguientes módulos: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Integración con el software manejo educativo moodle 2.5(compatible 2.7).
+\end_layout
+
+\begin_layout Itemize
+Una interfaz que permita a un docente crear trabajos de programación.
+\end_layout
+
+\begin_layout Itemize
+Un modulo que permita la subida de archivos a la aplicación, para su calificació
+n, configurable para indicar en qué trabajo de programación será calificado.
+\end_layout
+
+\begin_layout Itemize
+Un sistema que muestre los errores especificados por el compilador del código
+ fuente.
+ 
+\end_layout
+
+\begin_layout Itemize
+Un sistema que permita la creación de pruebas por medio de entradas y salidas
+ por archivos de texto.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Esta es la forma más simple porque no limita la forma de los archivos ni
+ las firmas de métodos enviados por los estudiantes.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Historias De Usuario
+\end_layout
+
+\begin_layout Itemize
+Generar la especificación del formato con el cual se comparará la documentación
+ de los archivos de código fuente para los lenguajes: java 1.6, scheme 5.0
+ o C++ 4.1.2.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+No especificar lo de que no había bases teóricas.
+ AQUI
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Crear un sistema de comparación de la documentación de los archivos de código
+ fuente contra el formato especificado y configurable para su correspondiente
+ lenguaje.
+\end_layout
+
+\begin_layout Itemize
+Documentación de código que permita la reutilización de el modulo(métodos
+ y variables públicos).
+ -Común a todos módulos-.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Cada modulo tiene documentación y toda esta documentación se encuentra en
+ la carpeta doxygen del cliente o del servidor entonces nos saltaremos esto.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Especificación de los dos formatos más populares de programación con los
+ cuales se comparará el estilo de los archivos de código fuente para los
+ lenguajes: java 1.6, scheme 5.0 o C++ 4.1.2.
+\end_layout
+
+\begin_layout BeginFrame
+Historias De Usuario
+\end_layout
+
+\begin_layout Itemize
+Crear un sistema de comparación de los estilos de los archivos de código
+ fuente contra el formato especificado para su correspondiente lenguaje.
+\end_layout
+
+\begin_layout Itemize
+Modificación del sistema de creación de trabajos de programación que permita
+ al mismo la funcionalidades de: para un trabajo de programación con su
+ lenguaje estipulado entre java 1.6, scheme 5.0 o C++ 4.1.2 se pueda escoger
+ un estilo de programación y un tipo de documentación que pueda ser aplicado
+ a el lenguaje en particular en un trabajo de programación particular.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Entonces tiene un sistema que sirve para configurarlo.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Manuales de uso.-De nuevo común a todos los módulos-
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+De nuevo los demás se obvian se encuentran en la sección 6 del documento
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Historias De Usuario
+\end_layout
+
+\begin_layout Itemize
+Modificar el sistema de creación de trabajos de programación para que permita
+ las funcionalidades de: para un lenguaje estipulado entre java 1.6, scheme
+ 5.0 o C++ 4.1.2 se pueda generar un trabajo de programación que al enviar
+ una solución se pueda en forma de varios archivos(como por ejemplo diferentes
+ clases en diferentes archivos en el caso de Java).
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+No mencionar que arriba no se menciono.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+*Módulo que usando los módulos desarrollados para la calificación de: la
+ documentación, el estilo, los errores del código fuente y los resultados
+ de las pruebas unitarias genere los datos necesarios para llenar la tabla
+ descrita.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Interfaz gráfica que revele un informe de los resultados de las pruebas.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+La gráfica que muestra las calificaciones aunque contaba con una maqueta
+ en la primer iteración no tenia su funcionalidad completa.
+ Esto lo explico mejor en codificación.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Historias De Usuario(Tareas No Finalizadas)
+\end_layout
+
+\begin_layout Itemize
+Generación de los artefactos de documentación más populares para Extreme
+ Programming (adaptación de los antiguos artefactos incompletos).
+\end_layout
+
+\begin_layout Itemize
+Traducir aplicación de ingles a español.
+\end_layout
+
+\begin_layout BeginFrame
+Historias De Usuario (Tareas No Finalizadas)
+\end_layout
+
+\begin_layout Itemize
+Luego de terminar la funcionalidad de la aplicación hay que mejorar la calidad
+ de los instaladores e incluir la creación del demonio de la actividad 2.
+\end_layout
+
+\begin_layout Itemize
+Generar las conclusiones del proyecto.
+\end_layout
+
+\begin_layout Section
+Diseño
+\end_layout
+
+\begin_layout BeginFrame
+Diseño
+\end_layout
+
+\begin_layout Itemize
+Se decide usar el lenguaje nativo de moodle (php) y en el proceso se descubren
+ aplicaciones que podrían servir como base:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se revisan las aplicaciones para escoger la mejor (se encuentran en el estado
+ del arte): 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Schemeassessment.
+\end_layout
+
+\begin_layout Itemize
+Prakomat.
+\end_layout
+
+\begin_layout Itemize
+Tamarin.
+\end_layout
+
+\begin_layout Itemize
+google summer code Onlinejudge / Epaile.
+\end_layout
+
+\begin_layout Itemize
+Online Judge 2 plugin for Moodle 2 de Sun Zhigang para moodle 2.3, 2.4.
+\end_layout
+
+\begin_layout Itemize
+AutoGrader.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout BeginFrame
+Diseño
+\end_layout
+
+\begin_layout Itemize
+Para mejorar la conexión entre demonios y la seguridad del cliente ejecutado
+ en moodle se utilizo:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+La solución salio de la forma en que se conectan los diferentes demonios
+ a el sistema de domjudge-judgehost (conexión directa de los clientes a
+ la base de datos del servidor).
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Diseño
+\end_layout
+
+\begin_layout Itemize
+De este sale la metáfora del sistema:
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename imagenes/arquitectura_trabajo_de_grado.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Arquitectura del sistema
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+El resto del diseño se basa en las aplicaciones escogidas como base y sus
+ diagramas y conexiones mucho de lo que voy a explicar en la codificación,
+ el resto con sus detalles finos se encuentra en los diagramas del informe.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Codificación
+\end_layout
+
+\begin_layout BeginFrame
+Aplicación Base Moodle
+\end_layout
+
+\begin_layout Itemize
+Como se le dio solucion a las historias de usuario.
+ Y las particularidades de este desarrollo.
+\end_layout
+
+\begin_layout BeginFrame
+Aplicación Base Moodle
+\end_layout
+
+\begin_layout Itemize
+Se escoge como aplicación base en moodle (cliente) la aplicación Online
+ Judge 2 plugin for Moodle 2:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+De las aplicaciones disponibles sirve para la versión más reciente de moodle
+ (2.4).
+\end_layout
+
+\begin_layout Itemize
+Además de las funcionalidades descritas cuenta la posibilidad de asignar
+ diferente peso a cada caso de prueba.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Se pueden tener casos más difíciles con mejores porcentajes.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Y de proveer feedback cuando se tiene un caso de prueba fallido.
+\end_layout
+
+\begin_layout Itemize
+Como punto contrario dependía de ideone un servicio online que aunque contara
+ con varios lenguajes no permitía el envió de multiarchivos.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Se puede configurar en el:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Máximo tamaño del envió (MB), la máxima cantidad de archivos enviada(max
+ 1000)
+\end_layout
+
+\begin_layout Itemize
+El lenguaje (C++, Java, Racket).
+\end_layout
+
+\begin_layout Itemize
+El tiempo máximo de ejecución(el sistema corta la ejecución).
+\end_layout
+
+\begin_layout Itemize
+Configurar si la compilación cuenta en la calificación de los estilos (documenta
+ción, indentación).
+\end_layout
+
+\begin_layout Itemize
+Radio de error de presentación.
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Calificación De Varios Archivos
+\end_layout
+
+\begin_layout Itemize
+Para soportar la calificación de un envió con archivos múltiples se modifico
+ la aplicación cliente eliminado a ideone y conectando a domjudge-judgehost
+ atraves de la metáfora del sistema.
+\end_layout
+
+\begin_layout Itemize
+Domjudge-judgehost 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Sirvió como maqueta para la ejecución de las demás funcionalidades del proyecto.
+\end_layout
+
+\begin_layout Itemize
+Permite la ejecución de un entorno chroot que aumenta en forma considerable
+ la ejecución de los envíos.
+\end_layout
+
+\begin_layout Itemize
+Puede ejecutar múltiples demonios en la misma maquina o en diferentes maquinas
+ y que todos puedan calificar al tiempo ya sea para aumentar la eficiencia
+ o para evitar fallas del sistema.
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Calificación De Varios Archivos
+\end_layout
+
+\begin_layout Itemize
+Luego de su instalación se pudieron implementar fail-safe's en los estados
+ de la base de datos que ayudan a que el demonio de Domjudge-judgehost no
+ se estanque por funcionamiento no esperado del demonio del lado del cliente
+ o viceversa.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Los problemas se ponen en invalid cuando judgehost falla y cuando se borra
+ un estilo de documentación o algo parecido todos los problemas que tengan
+ ese estilo se cambian al default
+\end_layout
+
+\begin_layout Plain Layout
+Incluso hay restricciones para no poder realizar envíos en un trabajo de
+ programación sin casos de prueba
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Domjudge-judgehost permite la inclusión de cualquier otro lenguaje siguiendo
+ el manual incluido en el informe.
+\end_layout
+
+\begin_layout Itemize
+Por la simple implementación y la forma de comunicación (redirección a archivos)
+ de las partes del judgehost cualquiera de estas puede ser simplemente reemplaza
+da o reescrita o incluso añadida con relativa simpleza.
+\end_layout
+
+\begin_layout BeginFrame
+Formato De Calificación De La Documentación
+\end_layout
+
+\begin_layout Itemize
+Hay muchísimos estilos de documentación; ninguno estándar reconocido.
+\end_layout
+
+\begin_layout Itemize
+Se decide entonces utilizar la popularidad y la usabilidad:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se decide usar el estilo oficial de doxygen @etiqueta.
+\end_layout
+
+\begin_layout Itemize
+Doxygen sirve como generador de documentación automático en: C++, C, Objective-C
+, C#, PHP, Java, Python, IDL - Corba, Microsoft, y los sabores UNO / OpenOffice
+ -, Fortran, VHDL, Tcl.
+\end_layout
+
+\begin_layout Itemize
+La idea es que sea algo que se aplique más allá de la academia.
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Sistema De Calificación De La Documentación
+\end_layout
+
+\begin_layout Itemize
+A julio-2014 para la implementación que considera la calidad de la documentación
+ como una magnitud medible no es posible encontrar antecedentes.(Se encuentran
+ forzadores de documentación).
+\end_layout
+
+\begin_layout Itemize
+La idea es simple:
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Formula $calificacion=\tfrac{etiquetas-validas}{etiquetas-posibles}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Radio de etiquetas validas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Sistema De Calificación De La Documentación
+\end_layout
+
+\begin_layout Itemize
+Se reduce el subconjunto de etiquetas calificables a @author, @version,
+ @copyright, @license, @package porque la inclusión correcta de la calificación
+ de las demás etiquetas requeriría la creación de parser especial para cada
+ lenguaje en el juez.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Un parser especial porque los parser que generan los arboles sintácticos
+ eliminan los comentarios.
+\end_layout
+
+\begin_layout Itemize
+El parser es necesario porque una función en c++ y en racket pueden tener
+ parámetros de valor default y estos valores default ser objetos(o estructuras)
+ por si mismos y tener métodos con etiquetas de documentación y así sucesivament
+e.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+(define (f [arg (define (func...)]) ...
+\end_layout
+
+\begin_layout Itemize
+int f(int x=0, struct a = struct foo{ bool ...});
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+Implementado en java.
+\end_layout
+
+\begin_layout BeginFrame
+Formato De Calificación De La Indentación
+\end_layout
+
+\begin_layout Itemize
+Se utiliza una forma del archivo formateada pretty-print(no exactamente
+ solo indentación).
+\end_layout
+
+\begin_layout Itemize
+Los formatos como es costumbre se especifican mediante un párrafo sencillo
+ en lenguaje natural.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+bloques de codigo y parentesis de cerrada.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename imagenes_presentacion/codigoLisp.png
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Estilo Lisp
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Lo importante son los de cierre y que a esto se le conoce como estilo lisp
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Sistema De Calificación De La Indentación
+\end_layout
+
+\begin_layout Itemize
+Sin antecedentes para convertir su medida en una magnitud.
+\end_layout
+
+\begin_layout Itemize
+La cantidad de programas que realizan pretty-print sin involucrar una gui
+ son muy limitados:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se utilizan casos especiales:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+En C++/Java se utiliza indent (gnu) configurable por argumentos a la consola
+ (diferentes estilos).
+\end_layout
+
+\begin_layout Itemize
+En racket la única solución con pretty-print correcto y sin ciclos infinitos
+ es la creación de un script que utiliza la función (pretty-print ) del
+ propio racket.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout BeginFrame
+Sistema De Calificación De La Indentación
+\end_layout
+
+\begin_layout Itemize
+La implementación de la comparación entre los archivos indentados o no indentado
+s no es simple tradicionalmente:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se comparan carácter a carácter haciendo un espacio de más catastrófico
+\end_layout
+
+\begin_layout Itemize
+O se comparan omitiendo los espacios.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Entonces se comparan como dos cadenas de ADN (Python):
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Encuentra la subsecuencia contigua más larga (LCS).
+\end_layout
+
+\begin_layout Itemize
+Recursivamente se aplica a las piezas de las secuencias a la izquierda y
+ a la derecha de la subsecuencia coincidente.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+El valor de igualdad se calcula como: 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\tfrac{2(largo-coincidencias)}{suma-largos-cadenas}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Radio de igualdad
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Configuración De Un Trabajo De Programación (Casos De Prueba)
+\end_layout
+
+\begin_layout Itemize
+Todos extienden de la misma clase y se usan extendiendo la navegación a
+ nuevos menús.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /media/civilian/repos/tg/1_otros/productoDocs/imagenes/moodleActividadTestcases
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Casos de prueba de tarea
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Configuración De Un Trabajo De Programación (Indentación)
+\end_layout
+
+\begin_layout Itemize
+El sample de cada estilo es representativo contiene lo necesario para indentar
+ bien cualquier archivo (Clases, métodos, objetos, if, estructuras de control,
+ etc).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /media/civilian/repos/tg/1_otros/productoDocs/imagenes/moodleIndentacion
+	scale 30
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "FiguraConfiguraciónIndentacion"
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Configuración indentación de tarea
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Configuración De Un Trabajo De Programación (Documentación)
+\end_layout
+
+\begin_layout Itemize
+Cada profesor que cree su propio estilo pasa a ser el dueño del mismo, cualquier
+ otra persona lo puede usar en su tarea pero solo el dueño lo puede modificar.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /media/civilian/repos/tg/1_otros/productoDocs/imagenes/moodleDocumentacion
+	scale 27
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Configuración indentación de tarea
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Generar / Mostrar Notas Individuales
+\end_layout
+
+\begin_layout Itemize
+El encargado de calcular la nota final es el demonio judged.php que se encuentra
+ del lado del cliente que tiene en cuenta:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+La compilación.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+como ya les había dicho
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+El estado de los testcases.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Presentation Error
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+La nota de los estilos.
+\end_layout
+
+\begin_layout Itemize
+Los diferentes porcentajes de cada uno.
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Generar / Mostrar Notas Individuales
+\end_layout
+
+\begin_layout Itemize
+Se encarga de mostrar los diferentes estados de calificación de una trabajo
+ de programación.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Juzgando, en espera, fallido, error de presentación, etc.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+El cronjob de moodle se encarga de revisar si un envió lleva más de un tiempo
+ (configurable desde la aplicación) en espera y entonces envía emails que
+ se pueden configurar para que lleguen a el administrador de moodle o a
+ todas las personas que pueden crear trabajos de programación.
+\end_layout
+
+\begin_layout BeginFrame
+Generar / Mostrar Notas Individuales
+\end_layout
+
+\begin_layout Itemize
+Muestra los resultados específicos por caso de prueba:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /media/civilian/repos/tg/1_otros/productoDocs/imagenes/moodleCalificaciónDetalles
+	scale 30
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Detalles De La Calificación De Un Caso de Prueba
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Pruebas
+\end_layout
+
+\begin_layout BeginFrame
+Instalación base para pruebas.
+\end_layout
+
+\begin_layout Itemize
+Para realizar pruebas de un sistema con base de datos se necesita una base
+ de datos limpia:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+En moodle cuando se instala su suit de pruebas el se encarga de eso.
+\end_layout
+
+\begin_layout Itemize
+En el servidor Domjudge-Judgehost fue necesaria la creación de un apartado
+ en la instalación para crear esta base de datos con sus usuarios.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Se genera una librería que sirve para simplificar la generación de: trabajos
+ de programación, casos de prueba y estilos.
+\end_layout
+
+\begin_layout BeginFrame
+Librería de generación
+\end_layout
+
+\begin_layout Itemize
+Se necesita probar la librería de generación para pruebas:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se generan 3 trabajos de programación con diferentes lenguajes y notas máximas.
+\end_layout
+
+\begin_layout Itemize
+A una de estos trabajos se le generan tres casos de pruebas.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Uno de los casos de pruebas se borra.
+\end_layout
+
+\begin_layout Itemize
+Uno se modifica.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Se genera dos estilos de documentación.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Uno se modifica.
+\end_layout
+
+\begin_layout Itemize
+El otro se borra.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Se le cambia el estilo de documentación al trabajo de los 3 casos.
+\end_layout
+
+\begin_layout Itemize
+También el de indentación.
+\end_layout
+
+\begin_layout Itemize
+Se hace un envió (cambiando el usuario) a el trabajo de programación.
+\end_layout
+
+\begin_layout Itemize
+Se chequea la calificación del envió y de cada uno de sus casos de prueba.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Todos y cada uno de los pasos descritos son probados con assert contra los
+ cambios que deberían realizar en la base de datos.
+\end_layout
+
+\begin_layout BeginFrame
+Indentación
+\end_layout
+
+\begin_layout Itemize
+Para la indentación hay un archivo de prueba similar para cada lenguaje.
+\end_layout
+
+\begin_layout Itemize
+Se crean 5 trabajos de programación todos con el mismo estilo de indentación
+ y mayor porcentaje de valor en la indentación para ver las discrepancias.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+El envió al primer trabajo de programación debe volver con calificación
+ baja de indentación.
+\end_layout
+
+\begin_layout Itemize
+El segundo tiene que tener nota media.
+\end_layout
+
+\begin_layout Itemize
+El tercero tiene que tener nota perfecta.
+\end_layout
+
+\begin_layout Itemize
+El cuarto contiene errores de compilación (faltan paréntesis, o corchetes
+ o comillas) 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+viene a probar que el ni el indentador ni el comparador tienen problema
+ con estos archivos 
+\end_layout
+
+\begin_layout Itemize
+o se van a quedar en un ciclo infinito
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+El quinto contiene un archivo txt que no tiene nada que ver con el lenguaje.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Prueba lo que el cuarto con una estructura diferente.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout BeginFrame
+Documentación
+\end_layout
+
+\begin_layout Itemize
+Tiene una estructura igual que la prueba de indentación.
+\end_layout
+
+\begin_layout Itemize
+Se crean 5 trabajos de programación todos con las mismas características
+ que en indentación.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+El primero tiene que volver con 0 de nota de indentación.
+\end_layout
+
+\begin_layout Itemize
+El segundo tiene que tener nota media.
+\end_layout
+
+\begin_layout Itemize
+El tercero tiene que tener nota perfecta.
+\end_layout
+
+\begin_layout Itemize
+El cuarto contiene errores de compilación.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+viene a probar que el comparador no tiene un problema con estos archivos.
+\end_layout
+
+\begin_layout Itemize
+o se van a quedar en un ciclo infinito
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+El quinto contiene un archivo txt que no tiene nada que ver con el lenguaje.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+El envió de nota perfecta tiene 3 archivos independientes uno en el que
+ la documentación esta en la cabecera del archivo, *el otro tiene etiquetas
+ dentro de strings y su documentación esta en la mitad del archivo, *el
+ final tiene la documentación separada por etiquetas repartida en el archivo.
+\end_layout
+
+\begin_layout BeginFrame
+Test extras
+\end_layout
+
+\begin_layout Itemize
+Se incluye un test que revisa la 
+\series bold
+seguridad del sistema
+\series default
+(configuración correcta de los permisos) viendo que ninguno de los envíos
+ pueda acceder a ningún archivo importante del sistema.(Un archivo por lenguaje).
+\end_layout
+
+\begin_layout Itemize
+Se incluye un test con 
+\series bold
+porcentaje 0
+\series default
+ en todos sus apartados para ver que esto no modifique la forma de calificación
+ o genere problemas de ejecución.
+\end_layout
+
+\begin_layout BeginFrame
+Test extras
+\end_layout
+
+\begin_layout Itemize
+Se incluye una prueba que asegura la funcionalidad de la posibilidad de
+ 
+\series bold
+cambiar la notas de un envió luego de calificado
+\series default
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se cambia la nota de la documentación.
+\end_layout
+
+\begin_layout Itemize
+Se cambia la nota de la indentación.
+\end_layout
+
+\begin_layout Itemize
+Se cambia el estado de calificación de todos los casos de prueba (documentados
+ abajo).
+\end_layout
+
+\begin_layout Itemize
+Y se asegura que todos estos cambios tenga impacto en la nota total.
+\end_layout
+
+\begin_layout Itemize
+Se cambia la nota total.
+\end_layout
+
+\end_deeper
+\begin_layout BeginFrame
+Casos de Prueba de Resultado
+\end_layout
+
+\begin_layout Itemize
+Se tienen en cuenta los diferentes resultados que se pueden generar al calificar
+ un envió y se realizan pruebas para estos.
+\end_layout
+
+\begin_layout Itemize
+Todas las pruebas que se comentaran son realizadas 3 veces una por cada
+ lenguaje en un archivo diferente.
+\end_layout
+
+\begin_layout Itemize
+También se chequean los estados de cada prueba contra la base de datos.
+\end_layout
+
+\begin_layout BeginFrame
+Casos de Prueba de Resultado
+\end_layout
+
+\begin_layout Itemize
+Test de envió aceptado;
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se crea un trabajo de programación con 3 casos de pruebas.
+\end_layout
+
+\begin_layout Itemize
+Se realiza un envió.
+\end_layout
+
+\begin_layout Itemize
+Se chequea que su calificación y la de sus casos de prueba sea 
+\begin_inset Quotes eld
+\end_inset
+
+accepted
+\begin_inset Quotes erd
+\end_inset
+
+, correcta.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Test de error en tiempo de ejecución;
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mismo proceso que en envió aceptado pero 2 casos de prueba y
+\end_layout
+
+\begin_layout Itemize
+Su resultado debe ser 
+\begin_inset Quotes eld
+\end_inset
+
+runtime-error
+\begin_inset Quotes erd
+\end_inset
+
+, error en tiempo de ejecución.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Test de error de cantidad de tiempo excedida:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Igual que error en tiempo de ejecución pero se espera un 
+\begin_inset Quotes eld
+\end_inset
+
+time-limit-exceed
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+El tiempo de ejecución del programa a superado el limite establecido para
+ el trabajo de programación.
+\end_layout
+
+\begin_layout Itemize
+El sistema termina la ejecución de estos envíos.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout BeginFrame
+Casos de Prueba de Resultado
+\end_layout
+
+\begin_layout Itemize
+Test de respuesta incorrecta.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se espera 
+\begin_inset Quotes eld
+\end_inset
+
+wrong-answer
+\begin_inset Quotes erd
+\end_inset
+
+, respuesta incorrecta.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Test de error de presentación
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se espera 
+\begin_inset Quotes eld
+\end_inset
+
+presentation-error
+\begin_inset Quotes erd
+\end_inset
+
+, error de presentación.
+\end_layout
+
+\begin_layout Itemize
+Se cambia el radio de error de presentación a un valor medio para que este
+ valor se represente en la nota total.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Test de error de compilación
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se espera 
+\begin_inset Quotes eld
+\end_inset
+
+compilation-error
+\begin_inset Quotes erd
+\end_inset
+
+, error de compilación.
+\end_layout
+
+\begin_layout Itemize
+Cada archivo tiene 2 trabajos de programación uno en el que la compilación
+ cuenta en la nota de los estilos y otro en el que no cuenta.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se evalúa cada uno.
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout BeginFrame
+Casos de Prueba de Resultado
+\end_layout
+
+\begin_layout Itemize
+Test de error de cantidad de memoria excedida:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se espera 
+\begin_inset Quotes eld
+\end_inset
+
+memory_limit_exceed
+\begin_inset Quotes erd
+\end_inset
+
+, cantidad de memoria excedida.
+\end_layout
+
+\begin_layout Itemize
+En los lenguajes interpretados la maquina virtual es la primera que activa
+ el error y el juez registra un error en tiempo de ejecución.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Test de error de cantidad de output excedida.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Se espera 
+\begin_inset Quotes eld
+\end_inset
+
+output_limit_exceed
+\begin_inset Quotes erd
+\end_inset
+
+.
+ El programa genero demasiada salida.
+\end_layout
+
+\begin_layout Itemize
+Debido al tamaño máximo de la salida este test siempre termina con el resultado
+ time-limit-exceed o memory-limit-exceed.
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Conclusiones
+\end_layout
+
+\begin_layout BeginFrame
+Conclusiones
+\end_layout
+
+\begin_layout Itemize
+La planeación en problemas de largo alcance es una tarea complicada que
+ solo se mejora con experiencia y con constante reimaginación de como lidiar
+ con todos los problemas posibles que se pueden encontrar en cualquier despliegu
+e.
+\end_layout
+
+\begin_layout Itemize
+Un sistema de calificación automático es un punto critico en la educación
+ ya que promete mejorar de forma considerable la calidad de los estudiantes
+ de sistemas por que les permite llevar la teoría a la verdadera practica
+ con parámetros claros y realmente probados sobre sus programas.
+ Además al facilitar la calificación aumenta de forma significativa la cantidad
+ de practica que puede tener un estudiante programando.
+\end_layout
+
+\begin_layout Itemize
+El hecho de que los trabajos sobre la valoración numérica de los estilos
+ ya sea de indentación o de documentación del código sean prácticamente
+ inexistentes presenta un vació interesante en las ciencias de la computación
+ y como se están midiendo dos valores que pueden tener tanta importancia
+ en la escalabilidad de cualquier aplicación.
+\end_layout
+
+\begin_layout BeginFrame
+Conclusiones
+\end_layout
+
+\begin_layout Itemize
+La utilización de esta herramienta permite que los profesores se eviten
+ mucho de trabajo repetitivo y poder concentrarse en áreas más interesantes
+ de la enseñanza e incluso reducen altamente la posibilidad del error humano
+ en las calificaciones de los estudiantes.
+\end_layout
+
+\begin_layout Itemize
+La utilización de código libre permite que una sola persona cree aplicaciones
+ complejas y con algún nivel de confiabilidad con un esfuerzo menor al requerido
+ al desarrollar estas aplicaciones desde el inicio.
+\end_layout
+
+\begin_layout Itemize
+Las practicas de desarrollo de software basadas que alientan realizar las
+ pruebas primero(TDD, BDD y recientemente XP) se nos han venido vendiendo
+ como la solución a todos los problemas del software actual, pero como todo
+ ingeniero de software debe saber no existe un 
+\begin_inset Quotes eld
+\end_inset
+
+Golden Hammer
+\begin_inset Quotes erd
+\end_inset
+
+ el enfoque excesivo en las pruebas no es la solución a todo.
+ Este acercamiento (en mi opinión y la de otros desarrolladores 
+\begin_inset Quotes eld
+\end_inset
+
+tddIsdeath
+\begin_inset Quotes erd
+\end_inset
+
+) si se utiliza de forma excesiva puede causar que la calidad de los diseños
+ se vea reducida incluyendo muchos objetos de servicio y/o compromisos en
+ el diseño que reducen la calidad del proyecto.
+\end_layout
+
+\begin_layout Section
+Trabajos futuro
+\end_layout
+
+\begin_layout BeginFrame
+Trabajos futuros
+\end_layout
+
+\begin_layout Itemize
+Extender la funcionalidad de las opciones de calificación del estilo de
+ indentación para permitir más opciones y por lo tanto permitir la especificació
+n de estilos más flexibles que se podrían acercar más a las diferentes configura
+ciones permitidas por los formateadores de estilo del entorno de programación
+ eclipse.
+ Y también poder extender las posibilidades de la calificación de los comentario
+s.
+\end_layout
+
+\begin_layout Itemize
+Permitir que los estilos de programación e indentación puedan ser descargables
+ y que se puedan compartir entre profesores.
+\end_layout
+
+\begin_layout Itemize
+Incluir en el entorno de calificación restricciones sobre la cantidad de
+ memoria permitida en un programa sin que estos sean los estándares del
+ lenguaje de programación utilizado en el trabajo de programación.
+\end_layout
+
+\begin_layout Itemize
+La posibilidad de un curso autocalificable para aprender técnicas sobre
+ algún tema en especial, en donde podría tomar como ejemplo portal USACO.
+\end_layout
+
+\begin_layout BeginFrame
+Trabajos futuros
+\end_layout
+
+\begin_layout Itemize
+Mediante la adición del tiempo de envió de un trabajo de programación como
+ algo calificable se podrían organizar maratones de programación para todas
+ las personas con acceso al la aplicación de forma simple.
+\end_layout
+
+\begin_layout Itemize
+Incluir más lenguajes de programación basándose en algunos de los scripts
+ ya existentes para su compilación y extendiendo la funcionalidades implementada
+s para la calificación del estilo y de la documentación.
+\end_layout
+
+\begin_layout Itemize
+Dar la posibilidad a los usuarios estudiantes de incluir pruebas o 
+\begin_inset Quotes eld
+\end_inset
+
+testcases
+\begin_inset Quotes erd
+\end_inset
+
+ para un trabajo de programación en concreto y así no solo aumentar la cantidad
+ de pruebas realizables para un trabajo de programación sino también poder
+ incluir una bonificación para la persona que cree estos nuevos casos de
+ pruebas.
+\end_layout
+
+\begin_layout BeginFrame
+Trabajos futuros
+\end_layout
+
+\begin_layout Itemize
+Incluir un foro que tenga información de links e información sobre las diferente
+s técnicas de programación usadas en cada uno de los trabajos de programación
+ cuyo funcionamiento sea parecido a Algorithm Tutorials de topcoder.
+\end_layout
+
+\begin_layout Itemize
+Permitir la capacidad de no solo generar pruebas para el código que tengan
+ en cuenta su salida para una entrada dada sino también que se puedan realizar
+ pruebas unitarias sobre el código mandado y algunas pruebas automáticas
+ sobre el funcionamiento del software como por ejemplo las realizadas por
+ selenium.
+ Lo anterior no solo para los usuarios que crean los trabajos de programación
+ sino también permitir que los estudiantes envíen sus propias pruebas de
+ código.
+\end_layout
+
+\begin_layout BeginFrame
+Trabajos futuros
+\end_layout
+
+\begin_layout Itemize
+Incluir la posibilidad de usar PMD(no tiene nombre oficial) sobre el código
+ enviado esto para detectar posibles bugs, código muerto o código subóptimo
+ o sobrecomplicado.
+\end_layout
+
+\begin_layout Itemize
+La posibilidad de ordenar las envíos de soluciones por tiempos de ejecución
+ y por uso de memoria para conocer cuales son las mejores y además incluir
+ la posibilidad de calificar la limpieza del código.
+\end_layout
+
+\begin_layout Itemize
+Mediante la adición de la posibilidad de revisar el código de diferentes
+ envíos hechos por otros estudiantes a un trabajo de programación en concreto
+ los estudiantes podrían enviar su código la cantidad de veces que quieran
+ antes de la fecha de entrega limite así pueden cambiar su código teniendo
+ en cuenta cosas que aprendieran del código de los demás o de los comentarios
+ sobre su propio código.
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\end_body
+\end_document
